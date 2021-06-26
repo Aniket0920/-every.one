@@ -7,8 +7,27 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-//const nodemailer = require("nodemailer");
-//const cron = require("node-cron");
+const nodemailer = require("nodemailer");
+const cron = require("node-cron");
+
+mongoose.connect("mongodb://localhost:27017/mailDB",
+ {useNewUrlParser: true,
+ useUnifiedTopology: true,
+ useFindAndModify: false
+});
+
+const mailSchema = {
+  to: String,
+  cc: String,
+  scheduler: String,
+  subject: String,
+  content: String,
+  time: Array
+};
+
+const Mail = mongoose.model("Mail", mailSchema);
+
+const toSend = [];
 
 const app = express();
 
@@ -18,29 +37,28 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
- const toSend = [
-  {
-    title: `Message 1`,
-    message: `This is first messageThis is first messageThis is first messageThis is first messageThis is first message`,
-    time: `13:00`
-  },
-  {
-    title: `Message 2`,
-    message: `This is first messageThis is first messageThis is first messageThis is first messageThis is first message`,
-    time: `13:00`
-  }
-];
-
 app.get("/mails/:mailID", function(req, res) {
-    res.render("mail");
-    res.end();
+  toSend.forEach(function (currMail) {
+    if(currMail.title === req.params.mailID) {
+      res.render("mail", {
+        toSend: toSend,
+        currMail: currMail
+      });
+    }
+  });
 });
 
 app.get("/", function(req, res) {
-  res.render("home", {
-    toSend: toSend
-  });
-  res.end();
+  Mail.find({}, function(err, mails) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("home", {
+          mails: mails
+        });
+    }
+  })
+
 });
 
 app.get("/login", function(req, res) {
@@ -58,8 +76,14 @@ app.get("/history", function(req, res) {
 });
 
 app.get("/compose", function(req, res) {
-  res.render("compose", {
-    toSend: toSend
+  Mail.find({}, function(err, mails) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("compose", {
+          mails: mails
+        });
+    }
   });
 });
 
@@ -70,9 +94,23 @@ app.post("/compose", function(req, res) {
   const sendTo = req.body.to;
   const cc = req.body.cc;
   const subject = req.body.subject;
-  console.log(hour + ":" + min);
+  const content = req.body.content;
   const scheduler = req.body.scheduler;
   let timer = "";
+
+  const mail = new Mail ({
+    to: sendTo,
+    cc: cc,
+    scheduler: scheduler,
+    subject: subject,
+    content: content,
+    time: [hour,min]
+  });
+  mail.save(function(err) {
+    if(!err) {
+      res.redirect("/");
+    }
+  });
 
  switch (scheduler) {
     case "Reccurent":
@@ -102,7 +140,7 @@ app.post("/compose", function(req, res) {
   const mailOptions = {
     to : sendTo,
     subject : subject,
-
+    text: content
   }
 
   cron.schedule(timer, () => {
