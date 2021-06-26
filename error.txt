@@ -1,3 +1,0 @@
-line 34-44 app.js
-error - header files not getting rendered at client side.
-related files - mail.ejs,home.ejs
