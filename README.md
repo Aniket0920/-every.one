@@ -38,6 +38,6 @@ The project is developed specifically using MERN stack.
 - After Cloning the repository 
 - Open the file 
 - In terminal console navigate to the project directory and install all npm packages necessary
-- Start the mongodg server locally in another terminal
+- Start the mongodb server locally in another terminal
 - Start the node server by command node app.js
 - Open the website by opening the http://localhost:3000 in the web browser (preferably :-Google Chrome)
