@@ -9,7 +9,7 @@ Team
 The project is a full stack web application where users can login and send recurring mails to the recipients. 
 
 - Login and signup via Username-password / Gmail Sync 
-- Create/Edit the mail features. 
+- Create the mail features. 
 - Home page ( has the list of all the mails scheduled for future) 
 - History Page ( has the list of mails sent till now ) 
 
