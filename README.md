@@ -33,3 +33,11 @@ Included are text editing features such as:
 - Changing the font type of the text and more
 
 The project is developed specifically using MERN stack.
+
+# Build & Run :- 
+- After Cloning the repository 
+- Open the file 
+- In terminal console navigate to the project directory and install all npm packages necessary
+- Start the mondgobg server locally in another terminal
+- Start the node server by command node app.js
+- Open the website by opening the http://localhost:3000 in the web browser (preferably :-Google Chrome)
