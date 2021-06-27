@@ -31,4 +31,5 @@ Included are text editing features such as:
 - Making the text bold or italic 
 - Changing the colour of the text 
 - Changing the font type of the text and more
+
 The project is developed specifically using MERN stack.
