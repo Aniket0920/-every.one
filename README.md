@@ -6,8 +6,6 @@ Team
 - S.Rishy Parasar
 - Saurav Kumar
 
-Project id:
-
 The project is a full stack web application where users can login and send recurring mails to the recipients. 
 
 - Login and signup via Username-password / Gmail Sync 
