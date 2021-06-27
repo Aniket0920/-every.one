@@ -2,7 +2,7 @@
 Team
 
 - Aakash Gupta
-- Aniket Agrawal
+- Aniket Agarawal
 - S.Rishy Parasar
 - Saurav Kumar
 
