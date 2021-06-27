@@ -16,7 +16,7 @@ The general mail features are included like
 - Subject 
 - Mail Body 
 - Send Mail Button 
-- Schedule Selector 
++ Schedule Selector 
  - Recurring schedule - Mail is automatically sent to the recipient after every 20 or 30 second .
  - Weekly schedule - Mail is automatically sent to the recipient on any particular day and time of every week .
  - Monthly schedule - Mail is automatically sent to the recipient on any particular date and time of every month .
