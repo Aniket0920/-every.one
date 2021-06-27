@@ -1,0 +1,75 @@
+<%- include('partials/header') %>
+
+  <div class="main_body">
+    <div class="navigator">
+      <div class="everyone">
+        <i class="material-icons main_icon">mail</i>
+        <p>@every.one</p>
+      </div>
+      <a href="/"><div class="home active_navigator">
+        <i class="material-icons home_icon">home</i>
+        <p>Home</p>
+      </div></a>
+      <br />
+      <a href="/history"><div class="history tab" href="/history">
+        <i class="material-icons history_icon">history</i>
+        <p>History</p>
+      </div></a>
+      <div class="blank" style="margin-top: 440px;"></div>
+        <a href="/logout">
+          <div class="logout">
+            <i class="material-icons logout_icon">logout</i>
+            <p class="singIn">
+              <font size="2px">Signed In As:</font><br /><font size="4px"
+                ><strong><%= username %></strong></font>
+            </p>
+          </div>
+        </a>
+    </div>
+    <div class="logs">
+      <div class="log_header">
+        <p class="log_title">Home</p>
+        <a href="/compose"><div class="compose">
+          <i class="material-icons add_icon">add</i>
+          <p class="compose_text">Compose</p>
+        </div></a>
+      </div>
+      <div class="log_body">
+
+        <% mails.forEach(function (curr) { %>
+        <a href="/mails/<%= curr._id %>"><div class="message_row <%= curr._id %>" >
+          <div class="message_summary ">
+            <p class="message_title"><%= curr.subject %></p>
+            <p class="message_body"><%= curr.content.length > 40 ? curr.content.slice(0, 30) + "..." : curr.content  %></p>
+          </div>
+          <div>
+            <p class="time" align="right"><%= curr.scheduler %></p>
+          </div>
+        </div></a>
+        <%  }); %>
+
+      </div>
+    </div>
+    <div class="mail">
+    <div class="mail_view">
+      <div class="title_container"><%= currMail.subject %></div>
+      <div class="to_container">to : <%= currMail.to %></div>
+      <div class="message_container"><%- currMail.content %></div>
+    </div>
+  </div>
+  </div>
+
+<!-- <script>
+    const cMail =  currMail._id;
+    const rowActive = document.querySelector(".message_summary");
+    const msgActive = document.querySelector(".message_title");
+    const contentActive = document.querySelector(".message_body");
+     document.querySelector(`.${cMail}`).addEventListener('click',function () {
+      rowActive.classList.add('row_active');
+      msgActive.classList.add('message_active');
+       contentActive.classList.add('summary_active');
+     });
+</script> -->
+
+
+<%- include('partials/footer') %>
