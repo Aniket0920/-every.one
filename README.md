@@ -1,4 +1,4 @@
-# Flipr_Hackathon
+# @Every.one
 Team
 
 - Aakash Gupta
